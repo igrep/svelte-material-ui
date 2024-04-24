@@ -476,7 +476,10 @@
           // Don't update the instance again.
           previousSelectedIndex = index;
           selectedIndex = index;
-          value = getMenuItemValues()[selectedIndex];
+          const menuItems = getMenuItemValues();
+          if (menuItems.length < selectedIndex) {
+            value = menuItems[selectedIndex];
+          }
         },
         focusMenuItemAtIndex: (index) => {
           list.focusItemAtIndex(index);
