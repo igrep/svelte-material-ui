@@ -283,7 +283,6 @@
       selectedIndex = getListItemIndex(event.detail.element);
     }
     event.stopPropagation();
-    console.log("handleItemMount");
     dispatch(getElement(), 'SMUIList:mountItem', accessor);
   }
 
@@ -295,7 +294,6 @@
       itemAccessorMap.delete(event.detail.element);
     }
     event.stopPropagation();
-    console.log("handleItemUnmount");
     dispatch(getElement(), 'SMUIList:unmountItem', accessor);
   }
 

@@ -479,10 +479,10 @@
           previousSelectedIndex = index === -1 ? 0 : index;
           selectedIndex = previousSelectedIndex;
           const menuItems = getMenuItemValues();
+          // Avoid setting undefined to the value
           if (selectedIndex < menuItems.length) {
             value = menuItems[selectedIndex];
           }
-          console.log(selectedIndex, value, menuItems);
         },
         focusMenuItemAtIndex: (index) => {
           list.focusItemAtIndex(index);
@@ -667,7 +667,6 @@
   }
 
   function handleItemMountUnmount(event: CustomEvent<SMUIListAccessor>): void {
-    console.log("handleItemMountUnmount");
     list = event.detail;
     instance && instance.layoutOptions();
   }
