@@ -199,8 +199,8 @@
       {wrapFocus}
       bind:selectedIndex
       on:SMUIList:mount={(event) => (list = event.detail)}
-      on:SMUIList:mountItem={handleItemMountUnmount}
-      on:SMUIList:unmountItem={handleItemMountUnmount}
+      on:SMUIListItem:mount={handleItemMountUnmount}
+      on:SMUIListItem:unmount={handleItemMountUnmount}
       {...prefixFilter($$restProps, 'list$')}><slot /></List
     >
   </Menu>
@@ -666,9 +666,8 @@
     return element;
   }
 
-  function handleItemMountUnmount(event: CustomEvent<SMUIListAccessor>): void {
+  function handleItemMountUnmount(): void {
     console.log("handleItemMountUnmount");
-    list = event.detail;
     instance && instance.layoutOptions();
   }
 </script>
