@@ -199,6 +199,8 @@
       {wrapFocus}
       bind:selectedIndex
       on:SMUIList:mount={(event) => (list = event.detail)}
+      on:SMUIList:mountItem={handleItemMountUnmount}
+      on:SMUIList:unmountItem={handleItemMountUnmount}
       {...prefixFilter($$restProps, 'list$')}><slot /></List
     >
   </Menu>
@@ -474,12 +476,13 @@
         getSelectedIndex: () => selectedIndex,
         setSelectedIndex: (index) => {
           // Don't update the instance again.
-          previousSelectedIndex = index;
-          selectedIndex = index;
+          previousSelectedIndex = index === -1 ? 0 : index;
+          selectedIndex = previousSelectedIndex;
           const menuItems = getMenuItemValues();
-          if (menuItems.length < selectedIndex) {
+          if (selectedIndex < menuItems.length) {
             value = menuItems[selectedIndex];
           }
+          console.log(selectedIndex, value, menuItems);
         },
         focusMenuItemAtIndex: (index) => {
           list.focusItemAtIndex(index);
@@ -661,5 +664,11 @@
 
   export function getElement() {
     return element;
+  }
+
+  function handleItemMountUnmount(event: CustomEvent<SMUIListAccessor>): void {
+    console.log("handleItemMountUnmount");
+    list = event.detail;
+    instance && instance.layoutOptions();
   }
 </script>
