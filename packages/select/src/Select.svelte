@@ -475,9 +475,8 @@
         },
         getSelectedIndex: () => selectedIndex,
         setSelectedIndex: (index) => {
-          // Don't update the instance again.
-          previousSelectedIndex = index === -1 ? 0 : index;
-          selectedIndex = previousSelectedIndex;
+          previousSelectedIndex = index;
+          selectedIndex = index === -1 ? 0 : index;
           const menuItems = getMenuItemValues();
           // Avoid setting undefined to the value
           if (selectedIndex < menuItems.length) {
